@@ -7,6 +7,23 @@ var g_wall = new Wall([
   [1,2,1,1,1,1,2,1],
   [1,2,1,1,1,1,2,1],
   [1,2,1,1,1,1,2,1],
+  [1,2,1,1,1,1,2,1],
+  [1,2,1,1,1,1,2,1],
+  [1,2,1,1,1,1,2,1],
+  [1,2,1,1,1,1,2,1],
+  [1,2,1,1,1,1,2,1],
+  [1,2,1,1,1,1,2,1],
+  [1,2,1,1,1,1,2,1],
+  [1,2,1,1,1,1,2,1],
+  [1,2,1,1,1,1,2,1],
+  [1,2,1,1,1,1,2,1],
+  [1,2,1,1,1,1,2,1],
+  [1,2,1,1,1,1,2,1],
+  [1,2,1,1,1,1,2,1],
+  [1,2,1,1,1,1,2,1],
+  [1,2,1,1,1,1,2,1],
+  [1,2,1,1,1,1,2,1],
+  [1,2,1,1,1,1,2,1],
 
 ],0,0);
 
@@ -56,21 +73,27 @@ Wall.prototype.update = function(du){
 
 Wall.prototype.collidesWith = function(prevX, prevY, nextX, nextY, r){
 
-  var brickX = Math.floor( (prevX - this.brickhalfHeight) / this.spaceX);
-  var brickY = Math.floor( (prevY - this.brickhalfHeight) / this.spaceY);
+  if(g_ball.yVel > 0){
+    var brickX = Math.floor( (g_ball.cx + this.brickhalfHeight) / this.spaceX);
+    var brickY = Math.floor( (g_ball.cy + this.brickhalfHeight) / this.spaceY);
+  } else {
+    var brickX = Math.floor( (g_ball.cx - this.brickhalfHeight) / this.spaceX);
+    var brickY = Math.floor( (g_ball.cy - this.brickhalfHeight) / this.spaceY);
+  }
 
 
-  var nextbrickX = Math.floor( (prevX - this.brickhalfHeight) / this.spaceX);
-  var nextbrickY = Math.floor( (prevY - this.brickhalfHeight) / this.spaceY);
-
-
+  var nextbrickX = Math.floor( (nextX - this.brickhalfHeight) / this.spaceX);
+  var nextbrickY = Math.floor( (nextY - this.brickhalfHeight) / this.spaceY);
 
   /*try catch in case we check undefined brick */
   try{
           if(this.bricks[brickY][brickX].lives === 0){
             return false
           } else {
-            this.bricks[brickY][brickX].lives = this.bricks[brickY][brickX].lives - 1;
+
+            this.bricks[brickY][brickX].lives--;
+            console.log("This is prev X:" + brickX+" Y:"+brickY);
+            console.log("This is next X:" + nextbrickX+" Y:"+nextbrickY);
             return true;
           }
   }
@@ -96,7 +119,7 @@ Wall.prototype.render = function(ctx){
       }
 
       if(this.bricks[i][j].lives === 0){
-
+        ctx.fillStyle = "white";
       } else {
         ctx.strokeRect(this.bricks[i][j].x,this.bricks[i][j].y, this.bricks[i][j].halfWidth * 2, this.bricks[i][j].halfHeight * 2);
         ctx.fillRect(this.bricks[i][j].x,this.bricks[i][j].y, this.bricks[i][j].halfWidth * 2, this.bricks[i][j].halfHeight * 2);

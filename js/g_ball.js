@@ -7,7 +7,7 @@
 var g_ball = {
     cx: 50,
     cy: 200,
-    radius: 6,
+    radius: 5,
 
     xVel: 5,
     yVel: 5,
@@ -29,7 +29,6 @@ g_ball.update = function (du) {
     // Bounce off the paddles  or bricks
     if (g_paddle1.collidesWith(prevX, prevY, nextX, nextY, this.radius) || g_wall.collidesWith(prevX, prevY, nextX, nextY, this.radius))
     {
-        g_ball.angle();
         this.yVel *= -1;
     }
 
@@ -64,10 +63,11 @@ g_ball.render = function (ctx) {
     fillCircle(ctx, this.cx, this.cy, this.radius);
 };
 
-
+/*
 g_ball.angle = function(){
 
   if(this.paddlehit > 40 && this.xVel > 0 || this.paddlehit < -40 && this.xVel < 0){
     this.xVel *= -1;
   }
 }
+*/
