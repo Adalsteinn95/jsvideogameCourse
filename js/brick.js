@@ -7,36 +7,6 @@ var g_wall = new Wall([
   [1,2,1,1,1,1,2,1],
   [1,2,1,1,1,1,2,1],
   [1,2,1,1,1,1,2,1],
-  [1,2,2,2,2,2,2,1],
-  [1,2,2,2,2,2,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
 
 ],0,0);
 
@@ -86,33 +56,23 @@ Wall.prototype.update = function(du){
 
 Wall.prototype.collidesWith = function(prevX, prevY, nextX, nextY, r){
 
-  var brickX = Math.floor( (nextX - this.brickhalfHeight) / this.spaceX);
-  var brickY = Math.floor( (nextY - this.brickhalfHeight) / this.spaceY);
-  console.log("X: " + brickX + " vs " + " Y:" + brickY);
+  var brickX = Math.floor( (prevX - this.brickhalfHeight) / this.spaceX);
+  var brickY = Math.floor( (prevY - this.brickhalfHeight) / this.spaceY);
+
+
+  var nextbrickX = Math.floor( (prevX - this.brickhalfHeight) / this.spaceX);
+  var nextbrickY = Math.floor( (prevY - this.brickhalfHeight) / this.spaceY);
+
 
 
   /*try catch in case we check undefined brick */
   try{
-    // Check X coords
-    if ((nextX - r <= this.brickhalfWidth + this.width &&
-         prevX - r >= this.brickhalfWidth - this.width) ||
-        (nextX + r >= this.brickhalfWidth - this.width  &&
-         prevX + r <= this.brickhalfWidth + this.width)) {
-      // Check Y coords
-      if (nextY + r >= this.brickhalfWidth - this.height &&
-          nextY - r <= this.brickhalfWidth + this.height) {
-          console.log("HIT");
-        // It's a hit!
-
           if(this.bricks[brickY][brickX].lives === 0){
             return false
           } else {
             this.bricks[brickY][brickX].lives = this.bricks[brickY][brickX].lives - 1;
             return true;
           }
-
-      }
-    }
   }
   catch(e){
   }

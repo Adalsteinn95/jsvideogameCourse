@@ -7,11 +7,12 @@
 var g_ball = {
     cx: 50,
     cy: 200,
-    radius: 3,
+    radius: 6,
 
     xVel: 5,
     yVel: 5,
     paddlehit: 10,
+
 };
 
 g_ball.update = function (du) {
@@ -19,9 +20,11 @@ g_ball.update = function (du) {
     var prevX = this.cx;
     var prevY = this.cy;
 
+
     // Compute my provisional new position (barring collisions)
     var nextX = prevX + this.xVel * du;
     var nextY = prevY + this.yVel * du;
+
 
     // Bounce off the paddles  or bricks
     if (g_paddle1.collidesWith(prevX, prevY, nextX, nextY, this.radius) || g_wall.collidesWith(prevX, prevY, nextX, nextY, this.radius))
