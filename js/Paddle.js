@@ -39,7 +39,6 @@ Paddle.prototype.collidesWith = function(prevX, prevY, nextX, nextY, r) {
     if (nextY + r >= this.cy - this.halfHeight &&
         nextY - r <= this.cy + this.halfHeight) {
       // It's a hit!
-      console.log(g_ball);
       g_ball.paddlehit = this.cx - nextX;
       return true;
     }

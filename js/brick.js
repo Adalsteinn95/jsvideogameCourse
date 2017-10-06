@@ -73,21 +73,20 @@ Wall.prototype.update = function(du){
 
 Wall.prototype.collidesWith = function(prevX, prevY, nextX, nextY, r){
 
-  if(g_ball.yVel > 0){
-    var brickX = Math.floor( (g_ball.cx + this.brickhalfHeight) / this.spaceX);
-    var brickY = Math.floor( (g_ball.cy + this.brickhalfHeight) / this.spaceY);
-  } else {
-    var brickX = Math.floor( (g_ball.cx - this.brickhalfHeight) / this.spaceX);
-    var brickY = Math.floor( (g_ball.cy - this.brickhalfHeight) / this.spaceY);
-  }
+  var brickX = Math.floor( (nextX - this.startX + this.brickhalfHeight) / this.spaceX);
+  var brickY = Math.floor( (nextY - this.startY + this.brickhalfHeight) / this.spaceY);
 
-  var index_X = false;
-  var index_Y = false;
+  var prevX = Math.floor( (prevX - this.startX + this.brickhalfHeight) / this.spaceX);
+  var prevY = Math.floor( (prevY - this.startY + this.brickhalfHeight) / this.spaceY);
 
-  if(brickX != g_ball.lastXcord){
+
+  var index_X = 1;
+  var index_Y = 1;
+
+  if(brickX != prevX){
     index_X = true;
   }
-  if(brickY != g_ball.lastYcord){
+  if(brickY != prevY){
     index_Y = true;
   }
 
@@ -96,16 +95,24 @@ Wall.prototype.collidesWith = function(prevX, prevY, nextX, nextY, r){
   /*try catch in case we check undefined brick */
   try{
           if(this.bricks[brickY][brickX].lives === 0){
-            return [false,false];
+            return [index_X,index_Y];
           } else {
 
             this.bricks[brickY][brickX].lives--;
+            if(brickX !== prevX){
+              index_X = -1;
+            }
+
+            if(brickY !== prevY){
+              index_Y = -1;
+            }
+
             return [index_X,index_Y];
           }
   }
   catch(e){
   }
-
+  return [index_X,index_Y];
 
 
 

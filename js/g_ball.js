@@ -13,9 +13,7 @@ var g_ball = {
   yVel: 5,
   paddlehit: 10,
 
-  /*remember the last position of the ball*/
-  lastXcord: 0,
-  lastYcord: 0
+
 };
 
 g_ball.update = function(du) {
@@ -28,9 +26,9 @@ g_ball.update = function(du) {
   var nextY = prevY + this.yVel * du;
 
   // bounce off the bricks
-  var hit = g_wall.collidesWith();
-  console.log(hit);
-  this.hit(hit);
+  var hit = g_wall.collidesWith(prevX, prevY, nextX, nextY, this.radius);
+  this.xVel *= hit[0];
+  this.yVel *= hit[1];
 
 
   // Bounce off the paddle
@@ -76,21 +74,3 @@ g_ball.angle = function(){
   }
 }
 */
-
-g_ball.hit = function(hit){
-  try {
-    if (hit[0] === true) {
-      if (hit[1] === true) {
-        
-        this.yVel *= -1;
-        this.xVel *= -1;
-        return;
-      }
-      this.xVel *= -1
-      return;
-    }
-    if(hit[1]){
-      this.yVel *= -1;
-    }
-  } catch (e) {}
-}
