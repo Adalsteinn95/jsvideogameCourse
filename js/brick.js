@@ -81,20 +81,26 @@ Wall.prototype.collidesWith = function(prevX, prevY, nextX, nextY, r){
     var brickY = Math.floor( (g_ball.cy - this.brickhalfHeight) / this.spaceY);
   }
 
+  var index_X = false;
+  var index_Y = false;
 
-  var nextbrickX = Math.floor( (nextX - this.brickhalfHeight) / this.spaceX);
-  var nextbrickY = Math.floor( (nextY - this.brickhalfHeight) / this.spaceY);
+  if(brickX != g_ball.lastXcord){
+    index_X = true;
+  }
+  if(brickY != g_ball.lastYcord){
+    index_Y = true;
+  }
+
+
 
   /*try catch in case we check undefined brick */
   try{
           if(this.bricks[brickY][brickX].lives === 0){
-            return false
+            return [false,false];
           } else {
 
             this.bricks[brickY][brickX].lives--;
-            console.log("This is prev X:" + brickX+" Y:"+brickY);
-            console.log("This is next X:" + nextbrickX+" Y:"+nextbrickY);
-            return true;
+            return [index_X,index_Y];
           }
   }
   catch(e){
