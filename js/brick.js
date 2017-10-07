@@ -73,11 +73,21 @@ Wall.prototype.update = function(du){
 
 Wall.prototype.collidesWith = function(prevX, prevY, nextX, nextY, r){
 
-  var brickX = Math.floor( (nextX - this.startX + this.brickhalfHeight) / this.spaceX);
-  var brickY = Math.floor( (nextY - this.startY + this.brickhalfHeight) / this.spaceY);
+  if(g_ball.yVel > 0){
+    var brickX = Math.floor( (nextX - this.startX + this.brickhalfHeight) / this.spaceX);
+    var brickY = Math.floor( (nextY - this.startY + this.brickhalfHeight) / this.spaceY);
 
-  var prevX = Math.floor( (prevX - this.startX + this.brickhalfHeight) / this.spaceX);
-  var prevY = Math.floor( (prevY - this.startY + this.brickhalfHeight) / this.spaceY);
+    var prevX = Math.floor( (prevX - this.startX + this.brickhalfHeight) / this.spaceX);
+    var prevY = Math.floor( (prevY - this.startY + this.brickhalfHeight) / this.spaceY);
+  } else {
+    var brickX = Math.floor( (nextX - this.startX - this.brickhalfHeight) / this.spaceX);
+    var brickY = Math.floor( (nextY - this.startY - this.brickhalfHeight) / this.spaceY);
+
+    var prevX = Math.floor( (prevX - this.startX - this.brickhalfHeight) / this.spaceX);
+    var prevY = Math.floor( (prevY - this.startY - this.brickhalfHeight) / this.spaceY);
+  }
+
+
 
 
   var index_X = 1;
