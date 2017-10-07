@@ -1,29 +1,29 @@
 var g_wall = new Wall([
-  [1,1,1,1,1,1,1,1],
-  [1,1,1,1,1,1,1,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,2,2,2,2,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
-  [1,2,1,1,1,1,2,1],
+  [0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,2,2,2,2,2,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,0,3,0,0,2,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,0,0,0,0,2,0],
+  [0,2,0,0,0,0,2,0],
 
 ],0,0);
 
@@ -107,14 +107,39 @@ Wall.prototype.collidesWith = function(prevX, prevY, nextX, nextY, r){
           if(this.bricks[brickY][brickX].lives === 0){
             return [index_X,index_Y];
           } else {
+            /*HIT*/
+
+            var sound = new Audio();
+
+            sound = document.getElementById('hit');
+            sound.loop = false;
+            sound.currentTime = 0;
+            sound.play();
 
             this.bricks[brickY][brickX].lives--;
+
             if(brickX !== prevX){
               index_X = -1;
             }
 
             if(brickY !== prevY){
               index_Y = -1;
+            }
+            /*random generateor for powerups 10% changes to get one */
+            var x = Math.floor((Math.random() * 10) + 1);
+            if(x===5){
+              var g_powerup = new Powerup({
+                x: this.bricks[brickY][brickX].x + 40,
+                y: this.bricks[brickY][brickX].y,
+                balls: false,
+                gravity: 5,
+                r: 5,
+
+                /*check if we should render */
+                check: true
+              });
+
+              g_powerups.push(g_powerup);
             }
 
             return [index_X,index_Y];
@@ -130,15 +155,16 @@ Wall.prototype.collidesWith = function(prevX, prevY, nextX, nextY, r){
 }
 
 Wall.prototype.render = function(ctx){
-  ctx.strokeRect(this.startX,this.startY,this.width,this.height);
 
   for (var i in this.bricks) {
     for (var j in this.bricks[i]) {
 
-      if(this.bricks[i][j].lives === 2){
-        ctx.fillStyle = "purple";
+      if(this.bricks[i][j].lives === 3){
+        ctx.fillStyle = "#0E0B16";
+      }else if(this.bricks[i][j].lives === 2){
+        ctx.fillStyle = "#A239CA";
       } else if(this.bricks[i][j].lives === 1){
-        ctx.fillStyle = "red";
+        ctx.fillStyle = "#4717f6";
       }
 
       if(this.bricks[i][j].lives === 0){

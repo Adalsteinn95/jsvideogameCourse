@@ -61,10 +61,19 @@ var g_paddle1 = new Paddle({
 function updateSimulation(du) {
 
     g_ball.update(du);
+    g_ball2.update(du);
 
     g_paddle1.update(du);
 
     g_wall.update(du);
+
+    for (var i in g_powerups) {
+      if(g_powerups[i].check){
+        g_powerups[i].update(du);
+      }
+
+    }
+
 }
 
 
@@ -85,10 +94,18 @@ function updateSimulation(du) {
 function renderSimulation(ctx) {
 
     g_ball.render(ctx);
+    g_ball2.render(ctx);
 
     g_paddle1.render(ctx);
 
     g_wall.render(ctx);
+    for (var i in g_powerups) {
+      if(g_powerups[i].check){
+        g_powerups[i].render(ctx);
+      }
+
+    }
+
 
 }
 

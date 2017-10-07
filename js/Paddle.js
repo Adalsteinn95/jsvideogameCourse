@@ -19,12 +19,31 @@ Paddle.prototype.update = function(du) {
   } else if (g_keys[this.GO_RIGHT] && this.cx < g_canvas.width - this.halfWidth) {
     if (this.cx < g_canvas.width - this.halfWidth) {
       this.cx += 10;
+
     }
   }
 };
 
 Paddle.prototype.render = function(ctx) {
+
+
+  ctx.lineJoin = "round";
+
+  ctx.save();
+  ctx.lineWidth = 20;
+
+  ctx.beginPath();
+  ctx.lineTo(this.cx+this.halfWidth, this.cy);
+  ctx.lineTo(this.cx-this.halfWidth, this.cy);
+  ctx.closePath();
+  ctx.stroke();
+  ctx.fill();
+  ctx.restore();
+
+  ctx.lineWidth = 0;
+  ctx.fillStyle = "#6699f6";
   ctx.fillRect(this.cx - this.halfWidth, this.cy - this.halfHeight, this.halfWidth * 2, this.halfHeight * 2);
+
 };
 
 Paddle.prototype.collidesWith = function(prevX, prevY, nextX, nextY, r) {

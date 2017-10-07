@@ -4,7 +4,14 @@
 
 // BALL STUFF
 
-var g_ball = {
+// A constructor for balls
+function Ball(descr) {
+  for (var property in descr) {
+    this[property] = descr[property];
+  }
+}
+
+var g_ball = new Ball({
   cx: 50,
   cy: 200,
   radius: 5,
@@ -13,10 +20,21 @@ var g_ball = {
   yVel: 5,
   paddlehit: 10,
 
+});
 
-};
+var g_ball2 = new Ball({
+  cx: 10,
+  cy: 200,
+  radius: 5,
 
-g_ball.update = function(du) {
+  xVel: 5,
+  yVel: 5,
+  paddlehit: 10,
+
+});
+
+console.log(g_ball2);
+Ball.prototype.update = function(du) {
   // Remember my previous position
   var prevX = this.cx;
   var prevY = this.cy;
@@ -55,22 +73,16 @@ g_ball.update = function(du) {
   this.cy += this.yVel * du;
 };
 
-g_ball.reset = function() {
-  this.cx = 300;
-  this.cy = 100;
-  this.xVel = -5;
-  this.yVel = 4;
-};
 
-g_ball.render = function(ctx) {
+
+Ball.prototype.render = function(ctx) {
   fillCircle(ctx, this.cx, this.cy, this.radius);
 };
 
-/*
+
 g_ball.angle = function(){
 
   if(this.paddlehit > 40 && this.xVel > 0 || this.paddlehit < -40 && this.xVel < 0){
     this.xVel *= -1;
   }
 }
-*/
