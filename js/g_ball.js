@@ -76,6 +76,7 @@ Ball.prototype.update = function(du) {
 
 
 Ball.prototype.render = function(ctx) {
+  ctx.fillStyle = "#ffb732";
   fillCircle(ctx, this.cx, this.cy, this.radius);
 };
 

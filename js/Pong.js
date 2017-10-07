@@ -20,6 +20,12 @@ The "MAINLOOP" code, inside g_main, is much simplified as a result.
 var g_canvas = document.getElementById("myCanvas");
 var g_ctx = g_canvas.getContext("2d");
 
+var background = new Image();
+background.src = "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX3660180.jpg";
+
+
+
+
 /*
 0        1         2         3         4         5         6         7         8         9
 123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
@@ -59,6 +65,7 @@ var g_paddle1 = new Paddle({
 // GAME-SPECIFIC UPDATE LOGIC
 
 function updateSimulation(du) {
+    g_ctx.drawImage(background,0,0);
 
     g_ball.update(du);
     g_ball2.update(du);
@@ -92,6 +99,7 @@ function updateSimulation(du) {
 // GAME-SPECIFIC RENDERING
 
 function renderSimulation(ctx) {
+    g_ctx.drawImage(background,0,0);
 
     g_ball.render(ctx);
     g_ball2.render(ctx);

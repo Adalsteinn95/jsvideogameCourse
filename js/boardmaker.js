@@ -1,25 +1,26 @@
-function click(e){
-  console.log(e);
-}
 
 function change(i,j){
   var index = document.getElementsByClassName('row-'+i)[0].children[j];
-  console.log(index);
+
 
 
   g_newBoard[i][j] += 1;
 
-  if(g_newBoard[i][j] > 2){
+  if(g_newBoard[i][j] > 3){
     index.setAttribute("style", "background-color:white;");
     g_newBoard[i][j] = 0;
   }
 
+  if(g_newBoard[i][j] === 3){
+    index.setAttribute("style", "background-color:#0E0B16;");
+  }
+
   if(g_newBoard[i][j] === 1){
-    index.setAttribute("style", "background-color:red;");
+    index.setAttribute("style", "background-color:#4717f6;");
   }
 
   if(g_newBoard[i][j] === 2){
-    index.setAttribute("style", "background-color:purple;");
+    index.setAttribute("style", "background-color:#A239CA;");
   }
 }
 
@@ -86,7 +87,13 @@ function reset(){
   ];
   var index = document.getElementsByClassName('row');
 
-  for(var i in index){
-    console.log(index[i]);
+  for (var i = 0; i < index.length; i++) {
+    for (var j = 0; j < index[i].children.length; j++) {
+      index[i].children[j].setAttribute("style", "background-color:white;");
+    }
+
   }
+
+
+
 }

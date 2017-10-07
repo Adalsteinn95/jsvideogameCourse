@@ -36,6 +36,7 @@ Paddle.prototype.render = function(ctx) {
   ctx.lineTo(this.cx+this.halfWidth, this.cy);
   ctx.lineTo(this.cx-this.halfWidth, this.cy);
   ctx.closePath();
+  ctx.strokeStyle = "#7FFF00";
   ctx.stroke();
   ctx.fill();
   ctx.restore();
