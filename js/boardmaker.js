@@ -1,5 +1,8 @@
+var g_checker = false;
 
-function change(i,j){
+function checkIn(i,j){
+  g_checker = true;
+
   var index = document.getElementsByClassName('row-'+i)[0].children[j];
 
 
@@ -21,6 +24,37 @@ function change(i,j){
 
   if(g_newBoard[i][j] === 2){
     index.setAttribute("style", "background-color:#F13C20;");
+  }
+}
+
+function checkOut(){
+  g_checker = false;
+}
+
+function change(i,j){
+  if(g_checker){
+    var index = document.getElementsByClassName('row-'+i)[0].children[j];
+
+
+
+    g_newBoard[i][j] += 1;
+
+    if(g_newBoard[i][j] > 3){
+      index.setAttribute("style", "background-color:white;");
+      g_newBoard[i][j] = 0;
+    }
+
+    if(g_newBoard[i][j] === 3){
+      index.setAttribute("style", "background-color:#D79922;");
+    }
+
+    if(g_newBoard[i][j] === 1){
+      index.setAttribute("style", "background-color:#4056A1;");
+    }
+
+    if(g_newBoard[i][j] === 2){
+      index.setAttribute("style", "background-color:#F13C20;");
+    }
   }
 }
 
