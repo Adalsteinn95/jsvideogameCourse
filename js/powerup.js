@@ -28,9 +28,46 @@ Powerup.prototype.update = function(du) {
   var nextY = this.y + this.gravity;
 
   if (g_paddle1.collidesWith(prevX, prevY, nextX, nextY, this.r - 10)) {
+    this.randomPower();
     this.check = false;
   }
 
+}
 
+Powerup.prototype.randomPower = function(){
+  /*powerup that makes the paddle smaller*/
+  if(this.power === "getsmaller"){
+    g_paddle1.halfWidth -= 10;
+  }
 
+  /*powerup that makes the paddle bigger*/
+  if(this.power === "getbigger"){
+    g_paddle1.halfWidth += 10;
+  }
+
+  /*powerup that adds a ball*/
+
+  if(this.power === "anotherball"){
+    var ball = new Ball({
+      cx: 10,
+      cy: 100,
+      radius: 5,
+
+      xVel: 5,
+      yVel: 5,
+      paddlehit: 10,
+
+    });
+
+    g_balls.push(ball);
+    console.log(g_balls);
+  }
+
+  if(this.power === "speedUp"){
+    g_morespeed += 0.2;
+  }
+
+  if(this.power === "speedDown"){
+    g_morespeed -= 0.2;
+  }
 }

@@ -68,7 +68,6 @@ function updateSimulation(du) {
     g_ctx.drawImage(background,0,0);
 
     g_ball.update(du);
-    g_ball2.update(du);
 
     g_paddle1.update(du);
 
@@ -78,6 +77,10 @@ function updateSimulation(du) {
       if(g_powerups[i].check){
         g_powerups[i].update(du);
       }
+    }
+
+    for (var i in g_balls) {
+      g_balls[i].update(du);
 
     }
 
@@ -102,7 +105,6 @@ function renderSimulation(ctx) {
     g_ctx.drawImage(background,0,0);
 
     g_ball.render(ctx);
-    g_ball2.render(ctx);
 
     g_paddle1.render(ctx);
 
@@ -111,6 +113,11 @@ function renderSimulation(ctx) {
       if(g_powerups[i].check){
         g_powerups[i].render(ctx);
       }
+
+    }
+
+    for (var i in g_balls) {
+      g_balls[i].render(ctx);
 
     }
 

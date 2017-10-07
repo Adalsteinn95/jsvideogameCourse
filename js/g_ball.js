@@ -10,7 +10,7 @@ function Ball(descr) {
     this[property] = descr[property];
   }
 }
-
+var g_balls = [];
 var g_ball = new Ball({
   cx: 50,
   cy: 200,
@@ -22,18 +22,6 @@ var g_ball = new Ball({
 
 });
 
-var g_ball2 = new Ball({
-  cx: 10,
-  cy: 200,
-  radius: 5,
-
-  xVel: 5,
-  yVel: 5,
-  paddlehit: 10,
-
-});
-
-console.log(g_ball2);
 Ball.prototype.update = function(du) {
   // Remember my previous position
   var prevX = this.cx;
@@ -66,6 +54,10 @@ Ball.prototype.update = function(du) {
     this.xVel *= -1;
   }
 
+  this.xVel *= g_morespeed;
+  this.yVel *= g_morespeed;
+  g_morespeed = 1;
+
   // *Actually* update my position
   // ...using whatever velocity I've ended up with
   //
@@ -73,17 +65,10 @@ Ball.prototype.update = function(du) {
   this.cy += this.yVel * du;
 };
 
+var g_morespeed = 1;
 
 
 Ball.prototype.render = function(ctx) {
   ctx.fillStyle = "#ffb732";
   fillCircle(ctx, this.cx, this.cy, this.radius);
 };
-
-
-g_ball.angle = function(){
-
-  if(this.paddlehit > 40 && this.xVel > 0 || this.paddlehit < -40 && this.xVel < 0){
-    this.xVel *= -1;
-  }
-}

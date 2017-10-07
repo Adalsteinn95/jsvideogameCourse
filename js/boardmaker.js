@@ -12,15 +12,15 @@ function change(i,j){
   }
 
   if(g_newBoard[i][j] === 3){
-    index.setAttribute("style", "background-color:#0E0B16;");
+    index.setAttribute("style", "background-color:#D79922;");
   }
 
   if(g_newBoard[i][j] === 1){
-    index.setAttribute("style", "background-color:#4717f6;");
+    index.setAttribute("style", "background-color:#4056A1;");
   }
 
   if(g_newBoard[i][j] === 2){
-    index.setAttribute("style", "background-color:#A239CA;");
+    index.setAttribute("style", "background-color:#F13C20;");
   }
 }
 

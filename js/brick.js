@@ -125,9 +125,15 @@ Wall.prototype.collidesWith = function(prevX, prevY, nextX, nextY, r){
             if(brickY !== prevY){
               index_Y = -1;
             }
-            /*random generateor for powerups 10% changes to get one */
-            var x = Math.floor((Math.random() * 10) + 1);
-            if(x===5){
+            /*random generateor for powerups 20% changes to get one */
+            var randomBrick = Math.floor((Math.random() * 5) + 1);
+
+            /*random gengerator for powers*/
+            var randomPower = Math.floor(Math.random() * 5);
+            var powers = ['getbigger','getsmaller','anotherball','speedUp','speedDown'];
+
+
+            if(randomBrick===1){
               var g_powerup = new Powerup({
                 x: this.bricks[brickY][brickX].x + 40,
                 y: this.bricks[brickY][brickX].y,
@@ -136,7 +142,8 @@ Wall.prototype.collidesWith = function(prevX, prevY, nextX, nextY, r){
                 r: 5,
 
                 /*check if we should render */
-                check: true
+                check: true,
+                power: powers[randomPower],
               });
 
               g_powerups.push(g_powerup);
@@ -160,11 +167,11 @@ Wall.prototype.render = function(ctx){
     for (var j in this.bricks[i]) {
 
       if(this.bricks[i][j].lives === 3){
-        ctx.fillStyle = "#0E0B16";
+        ctx.fillStyle = "#D79922";
       }else if(this.bricks[i][j].lives === 2){
-        ctx.fillStyle = "#A239CA";
+        ctx.fillStyle = "#F13C20";
       } else if(this.bricks[i][j].lives === 1){
-        ctx.fillStyle = "#4717f6";
+        ctx.fillStyle = "#4056A1";
       }
 
       if(this.bricks[i][j].lives === 0){
