@@ -17,9 +17,10 @@ Powerup.prototype.render = function(ctx) {
 }
 
 Powerup.prototype.update = function(du) {
+  /*add gravity on powerup*/
   this.y += this.gravity;
-  /*Remember last position*/
 
+  /*Remember last position*/
   var prevX = this.x;
   var prevY = this.y;
 
@@ -36,8 +37,11 @@ Powerup.prototype.update = function(du) {
 
 Powerup.prototype.randomPower = function(){
   /*powerup that makes the paddle smaller*/
-  if(this.power === "getsmaller"){
-    g_paddle1.halfWidth -= 10;
+
+  if(g_paddle1.halfWidth > 10){
+    if(this.power === "getsmaller"){
+      g_paddle1.halfWidth -= 10;
+    }
   }
 
   /*powerup that makes the paddle bigger*/
@@ -62,11 +66,11 @@ Powerup.prototype.randomPower = function(){
     g_balls.push(ball);
     console.log(g_balls);
   }
-
+  /*powerup that adds speed*/
   if(this.power === "speedUp"){
     g_morespeed += 0.2;
   }
-
+  /*powerup that takes speed */
   if(this.power === "speedDown"){
     g_morespeed -= 0.2;
   }

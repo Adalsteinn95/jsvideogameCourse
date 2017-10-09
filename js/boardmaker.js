@@ -1,5 +1,9 @@
+
+
 var g_checker = false;
 
+
+/*function that checks if clicked on the boardmaker*/
 function checkIn(i,j){
   g_checker = true;
 
@@ -27,10 +31,13 @@ function checkIn(i,j){
   }
 }
 
+/*clicked off*/
 function checkOut(){
   g_checker = false;
 }
 
+
+/*change the board according to the selection*/
 function change(i,j){
   if(g_checker){
     var index = document.getElementsByClassName('row-'+i)[0].children[j];
@@ -86,11 +93,14 @@ var g_newBoard =[
   [0,0,0,0,0,0,0,0],
 ];
 
+/*apply the new board*/
 function applyBoard(){
   g_wall = new Wall(g_newBoard,0,0);
   reset();
 }
 
+
+/*reset the board */
 function reset(){
   g_newBoard =[
     [0,0,0,0,0,0,0,0],

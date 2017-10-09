@@ -4,6 +4,7 @@
 
 function clearCanvas(ctx) {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    g_ctx.drawImage(background,0,0);
 }
 
 function fillCircle(ctx, x, y, r) {

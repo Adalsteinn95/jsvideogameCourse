@@ -21,7 +21,7 @@ var g_canvas = document.getElementById("myCanvas");
 var g_ctx = g_canvas.getContext("2d");
 
 var background = new Image();
-background.src = "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX3660180.jpg";
+background.src = "space.jpg";
 
 
 
@@ -65,14 +65,10 @@ var g_paddle1 = new Paddle({
 // GAME-SPECIFIC UPDATE LOGIC
 
 function updateSimulation(du) {
-    g_ctx.drawImage(background,0,0);
 
     g_ball.update(du);
 
     g_paddle1.update(du);
-
-    g_wall.update(du);
-
     for (var i in g_powerups) {
       if(g_powerups[i].check){
         g_powerups[i].update(du);
@@ -102,7 +98,7 @@ function updateSimulation(du) {
 // GAME-SPECIFIC RENDERING
 
 function renderSimulation(ctx) {
-    g_ctx.drawImage(background,0,0);
+
 
     g_ball.render(ctx);
 

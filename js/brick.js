@@ -1,33 +1,35 @@
+
+/*global wall*/
 var g_wall = new Wall([
+  [1,1,1,1,1,1,1,1],
   [0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0],
-  [0,2,0,0,0,0,2,0],
-  [0,2,0,0,0,0,2,0],
   [0,2,2,2,2,2,2,0],
-  [0,2,0,0,0,0,2,0],
-  [0,2,0,0,0,0,2,0],
-  [0,2,0,0,0,0,2,0],
-  [0,2,0,0,0,0,2,0],
-  [0,2,0,0,0,0,2,0],
-  [0,2,0,0,0,0,2,0],
-  [0,2,0,0,0,0,2,0],
-  [0,2,0,0,0,0,2,0],
-  [0,2,0,0,0,0,2,0],
-  [0,2,0,0,0,0,2,0],
-  [0,2,0,3,0,0,2,0],
-  [0,2,0,0,0,0,2,0],
-  [0,2,0,0,0,0,2,0],
-  [0,2,0,0,0,0,2,0],
-  [0,2,0,0,0,0,2,0],
-  [0,2,0,0,0,0,2,0],
-  [0,2,0,0,0,0,2,0],
-  [0,2,0,0,0,0,2,0],
-  [0,2,0,0,0,0,2,0],
-  [0,2,0,0,0,0,2,0],
+  [0,0,3,0,0,3,0,0],
+  [0,0,3,0,0,3,0,0],
+  [0,2,2,2,2,2,2,0],
+  [0,0,3,0,0,3,0,0],
+  [0,0,3,0,0,3,0,0],
+  [0,2,2,2,2,2,2,0],
+  [0,0,3,0,0,3,0,0],
+  [0,0,3,0,0,3,0,0],
+  [0,2,2,2,2,2,2,0],
+  [0,0,3,0,0,3,0,0],
+  [0,0,3,0,0,3,0,0],
+  [0,2,2,2,2,2,2,0],
+  [0,0,0,3,0,0,0,0],
+  [1,1,1,1,1,1,1,1],
+  [0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0],
 
 ],0,0);
 
-
+/*constructor for wall*/
 function Wall(object,startX,startY) {
   this.startX = startX;
   this.startY = startY;
@@ -65,14 +67,11 @@ function Wall(object,startX,startY) {
   this.bricks = object;
 }
 
-
-Wall.prototype.update = function(du){
-
-
-}
-
+/*collusion for wall*/
 Wall.prototype.collidesWith = function(prevX, prevY, nextX, nextY, r){
 
+
+ /*set the collusion based if the ball is going down or op*/
   if(g_ball.yVel > 0){
     var brickX = Math.floor( (nextX - this.startX + this.brickhalfHeight) / this.spaceX);
     var brickY = Math.floor( (nextY - this.startY + this.brickhalfHeight) / this.spaceY);
@@ -108,7 +107,7 @@ Wall.prototype.collidesWith = function(prevX, prevY, nextX, nextY, r){
             return [index_X,index_Y];
           } else {
             /*HIT*/
-
+            /*sound 4 hit*/
             var sound = new Audio();
 
             sound = document.getElementById('hit');
@@ -118,6 +117,7 @@ Wall.prototype.collidesWith = function(prevX, prevY, nextX, nextY, r){
 
             this.bricks[brickY][brickX].lives--;
 
+            /*collusion on left or right side of the brick*/
             if(brickX !== prevX){
               index_X = -1;
             }
@@ -134,6 +134,7 @@ Wall.prototype.collidesWith = function(prevX, prevY, nextX, nextY, r){
 
 
             if(randomBrick===1){
+              /*new powerup*/
               var g_powerup = new Powerup({
                 x: this.bricks[brickY][brickX].x + 40,
                 y: this.bricks[brickY][brickX].y,

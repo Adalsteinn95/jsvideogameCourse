@@ -54,6 +54,7 @@ Ball.prototype.update = function(du) {
     this.xVel *= -1;
   }
 
+ /*more speed in case of the powerup*/
   this.xVel *= g_morespeed;
   this.yVel *= g_morespeed;
   g_morespeed = 1;
