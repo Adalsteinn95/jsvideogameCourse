@@ -17,7 +17,7 @@ function Ship(descr) {
     for (var property in descr) {
         this[property] = descr[property];
     }
-    
+
     // Remember my reset positions
     this.reset_cx = this.cx;
     this.reset_cy = this.cy;
@@ -30,6 +30,8 @@ Ship.prototype.KEY_LEFT   = 'A'.charCodeAt(0);
 Ship.prototype.KEY_RIGHT  = 'D'.charCodeAt(0);
 
 Ship.prototype.KEY_FIRE   = ' '.charCodeAt(0);
+
+
 
 // Initial, inheritable, default values
 Ship.prototype.rotation = 0;
@@ -46,6 +48,7 @@ Ship.prototype.update = function(du) {
 	this.computeSubStep(dStep);
     }
 
+
     if (keys[this.KEY_FIRE]) {
 	var relVel = 2;
 	var relVelX = +Math.sin(this.rotation) * relVel;
@@ -59,19 +62,19 @@ Ship.prototype.update = function(du) {
 }
 
 Ship.prototype.computeSubStep = function (du) {
-    
+
     var thrust = this.computeThrustMag();
 
     // Apply thrust directionally, based on our rotation
     var accelX = +Math.sin(this.rotation) * thrust;
     var accelY = -Math.cos(this.rotation) * thrust;
-    
+
     accelY += this.computeGravity();
 
     this.applyAccel(accelX, accelY, du);
-    
+
     this.wrapPosition();
-    
+
     if (thrust === 0 || g_allowMixedActions) {
         this.updateRotation(du);
     }
@@ -87,41 +90,41 @@ var NOMINAL_THRUST = +0.2;
 var NOMINAL_RETRO  = -0.1;
 
 Ship.prototype.computeThrustMag = function () {
-    
+
     var thrust = 0;
-    
+
     if (keys[this.KEY_THRUST]) {
         thrust += NOMINAL_THRUST;
     }
     if (keys[this.KEY_RETRO]) {
         thrust += NOMINAL_RETRO;
     }
-    
+
     return thrust;
 };
 
 Ship.prototype.applyAccel = function (accelX, accelY, du) {
-    
+
     // u = original velocity
     var oldVelX = this.velX;
     var oldVelY = this.velY;
-    
+
     // v = u + at
     this.velX += accelX * du;
-    this.velY += accelY * du; 
+    this.velY += accelY * du;
 
     // v_ave = (u + v) / 2
     var aveVelX = (oldVelX + this.velX) / 2;
     var aveVelY = (oldVelY + this.velY) / 2;
-    
+
     // Decide whether to use the average or not (average is best!)
     var intervalVelX = g_useAveVel ? aveVelX : this.velX;
     var intervalVelY = g_useAveVel ? aveVelY : this.velY;
-    
+
     // s = s + v_ave * t
     var nextX = this.cx + intervalVelX * du;
     var nextY = this.cy + intervalVelY * du;
-    
+
     // bounce
     if (g_useGravity) {
 
@@ -137,7 +140,7 @@ Ship.prototype.applyAccel = function (accelX, accelY, du) {
             intervalVelY = this.velY;
         }
     }
-    
+
     // s = s + v_ave * t
     this.cx += du * intervalVelX;
     this.cy += du * intervalVelY;
@@ -155,7 +158,7 @@ Ship.prototype.getPos = function () {
 Ship.prototype.reset = function () {
     this.setPos(this.reset_cx, this.reset_cy);
     this.rotation = this.reset_rotation;
-    
+
     this.halt();
 };
 

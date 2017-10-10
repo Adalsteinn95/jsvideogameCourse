@@ -34,7 +34,7 @@ Bullet.prototype.velY = 1;
 Bullet.prototype.lifeSpan = 3 * SECS_TO_NOMINALS;
 
 Bullet.prototype.update = function (du) {
-    
+
     // TODO: Implement this
 
     // NB: Remember to handle screen-wrapping... and "death"
@@ -42,7 +42,7 @@ Bullet.prototype.update = function (du) {
 
 Bullet.prototype.setPos = function (cx, cy) {
     this.cx = cx;
-    this.cy = cy;
+    this.cy = cy -30;
 }
 
 Bullet.prototype.getPos = function () {
@@ -64,10 +64,13 @@ Bullet.prototype.render = function (ctx) {
 
     var fadeThresh = Bullet.prototype.lifeSpan / 3;
 
-    // ..YOUR STUFF..
 
+    this.cx += this.velX;
+    this.cy += -this.velY;
+
+    // ..YOUR STUFF..
     g_sprites.bullet.drawWrappedCentredAt(
-	ctx, this.cx, this.cy, this.rotation
+	ctx, this.cx , this.cy, this.rotation
     );
 
     // ..YOUR STUFF..

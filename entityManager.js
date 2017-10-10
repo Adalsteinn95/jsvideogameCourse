@@ -97,6 +97,11 @@ init: function() {
 fireBullet: function(cx, cy, velX, velY, rotation) {
 
     // TODO: Implement this
+    var bullet = new Bullet(cx,cy,velX,velY,rotation);
+    bullet.setPos(cx,cy);
+
+    this._bullets.push(bullet);
+
 
 },
 
@@ -142,9 +147,13 @@ update: function(du) {
     for (var i in this._rocks) {
       this._rocks[i].update(du);
     }
-    
+
     for (var i in this._ships) {
       this._ships[i].update(du);
+    }
+
+    for (var i in this._bullets) {
+      this._bullets[i].update(du);
     }
 },
 
@@ -161,6 +170,10 @@ render: function(ctx) {
 
     for (var i in this._ships) {
       this._ships[i].render(ctx);
+    }
+
+    for (var i in this._bullets) {
+      this._bullets[i].render(ctx);
     }
 
 }
