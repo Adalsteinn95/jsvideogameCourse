@@ -94,11 +94,10 @@ init: function() {
 },
 
 fireBullet: function(cx, cy, velX, velY, rotation) {
-
+    var alife = 1;
     // TODO: Implement this
-    var bullet = new Bullet({cx,cy,velX,velY,rotation});
+    var bullet = new Bullet({cx,cy,velX,velY,rotation,alife});
     bullet.setPos(cx,cy);
-    console.log(bullet);
     this._bullets.push(bullet);
 
 
@@ -152,7 +151,11 @@ update: function(du) {
     }
 
     for (var i in this._bullets) {
-      this._bullets[i].update(du);
+      if(this._bullets[i].alife === this.KILL_ME_NOW){
+        this._bullets.splice(i,1);
+      } else {
+        this._bullets[i].update(du);
+      }
     }
 },
 
@@ -171,8 +174,13 @@ render: function(ctx) {
       this._ships[i].render(ctx);
     }
 
+
     for (var i in this._bullets) {
-      this._bullets[i].render(ctx);
+      if(this._bullets[i].alife === this.KILL_ME_NOW){
+        this._bullets.splice(i,1);
+      } else {
+        this._bullets[i].render(ctx);
+      }
     }
 
 }

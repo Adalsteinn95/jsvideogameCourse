@@ -25,9 +25,12 @@ Bullet.prototype.lifeSpan = 3 * SECS_TO_NOMINALS;
 
 Bullet.prototype.update = function (du) {
 
-    while(this.lifeSpan > 0){
+    if(this.lifeSpan > 0){
       this.lifeSpan /= 16.667
+    } else {
+      this.alife = -1;
     }
+
 
 
     // TODO: Implement this
