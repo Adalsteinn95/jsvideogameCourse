@@ -40,7 +40,7 @@ _generateRocks : function() {
 	NUM_ROCKS = 4;
 
   for (var i = 0; i < NUM_ROCKS; i++) {
-    this._rocks[i].push(new Rock());
+    this._rocks.push(new Rock());
   }
 
   console.log(entityManager);
@@ -138,6 +138,11 @@ update: function(du) {
 
     // NB: Remember to handle the "KILL_ME_NOW" return value!
     //     and to properly update the array in that case.
+
+    for (var i in this._rocks) {
+      this._rocks[i].update(du);
+    }
+    
     for (var i in this._ships) {
       this._ships[i].update(du);
     }
@@ -149,6 +154,10 @@ render: function(ctx) {
 
     // NB: Remember to implement the ._bShowRocks toggle!
     // (Either here, or if you prefer, in the Rock objects)
+    for (var i in this._rocks) {
+      this._rocks[i].render(ctx);
+    }
+
 
     for (var i in this._ships) {
       this._ships[i].render(ctx);

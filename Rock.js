@@ -18,9 +18,14 @@ function Rock() {
     // NB: Set our `cx` and `cy` values to random positions on the canvas
     //     `g_canvas`, and its properties, are available to you here.
 
+
+    /*random x and y based on the width and height of the canvas*/
+    var randomX = Math.floor(Math.random() * g_canvas.width);
+    var randomY = Math.floor(Math.random() * g_canvas.height);
+
     // Rock randomisation
-    this.cx = 0; // CHANGE THIS
-    this.cy = 0; // CHANGE THIS
+    this.cx = randomX; // CHANGE THIS
+    this.cy = randomY; // CHANGE THIS
     this.rotation = 0;
 
 
@@ -39,8 +44,14 @@ function Rock() {
     //
     // Some helper vars (e.g. `speed` and `dirn` might be good to have)
     //
-    this.velX = 0; // CHANGE THIS
-    this.velY = 0; // CHANGE THIS
+
+    /*convert*/
+    var convertMin = MIN_SPEED / SECS_TO_NOMINALS;
+    var convertMax = MAX_SPEED / SECS_TO_NOMINALS;
+
+
+    this.velX = (Math.floor(Math.random() * convertMax)) + convertMin;
+    this.velY = (Math.floor(Math.random() * convertMax)) + convertMin;
 
 
     var MIN_ROT_SPEED = 0.5,
@@ -49,7 +60,11 @@ function Rock() {
     // Set the rotational velocity between the MIN and MAX above.
     // (Again, these are expressed in pixels per second).
 
-    this.velRot = 0; // CHANGE THIS
+
+    var convertRotMin = MIN_ROT_SPEED / SECS_TO_NOMINALS;
+    var convertRotMax = MAX_ROT_SPEED / SECS_TO_NOMINALS;
+
+    this.velRot = (Math.random() * convertRotMax) + convertRotMin; // CHANGE THIS
 
 }
 
