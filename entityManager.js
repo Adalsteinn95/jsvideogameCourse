@@ -43,7 +43,6 @@ _generateRocks : function() {
     this._rocks.push(new Rock());
   }
 
-  console.log(entityManager);
 
     // TODO: Make `NUM_ROCKS` Rocks!
 },
@@ -97,9 +96,9 @@ init: function() {
 fireBullet: function(cx, cy, velX, velY, rotation) {
 
     // TODO: Implement this
-    var bullet = new Bullet(cx,cy,velX,velY,rotation);
+    var bullet = new Bullet({cx,cy,velX,velY,rotation});
     bullet.setPos(cx,cy);
-
+    console.log(bullet);
     this._bullets.push(bullet);
 
 

@@ -19,21 +19,16 @@ function Bullet(descr) {
     }
 }
 
-// Initial, inheritable, default values
-//
-// (You might want these to assist with early testing,
-//  even though they are unnecessary in the "real" code.)
-//
-Bullet.prototype.rotation = 0;
-Bullet.prototype.cx = 200;
-Bullet.prototype.cy = 200;
-Bullet.prototype.velX = 1;
-Bullet.prototype.velY = 1;
 
 // Convert times from seconds to "nominal" time units.
 Bullet.prototype.lifeSpan = 3 * SECS_TO_NOMINALS;
 
 Bullet.prototype.update = function (du) {
+
+    while(this.lifeSpan > 0){
+      this.lifeSpan /= 16.667
+    }
+
 
     // TODO: Implement this
 
@@ -42,7 +37,7 @@ Bullet.prototype.update = function (du) {
 
 Bullet.prototype.setPos = function (cx, cy) {
     this.cx = cx;
-    this.cy = cy -30;
+    this.cy = cy;
 }
 
 Bullet.prototype.getPos = function () {
@@ -64,9 +59,10 @@ Bullet.prototype.render = function (ctx) {
 
     var fadeThresh = Bullet.prototype.lifeSpan / 3;
 
-
     this.cx += this.velX;
-    this.cy += -this.velY;
+    this.cy += this.velY;
+
+
 
     // ..YOUR STUFF..
     g_sprites.bullet.drawWrappedCentredAt(
