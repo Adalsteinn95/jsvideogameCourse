@@ -39,6 +39,12 @@ _generateRocks : function() {
     var i,
 	NUM_ROCKS = 4;
 
+  for (var i = 0; i < NUM_ROCKS; i++) {
+    this._rocks[i].push(new Rock());
+  }
+
+  console.log(entityManager);
+
     // TODO: Make `NUM_ROCKS` Rocks!
 },
 
