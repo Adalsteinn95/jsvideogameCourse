@@ -17,16 +17,19 @@ function Bullet(descr) {
     for (var property in descr) {
         this[property] = descr[property];
     }
+
+    
 }
 
 
 // Convert times from seconds to "nominal" time units.
 Bullet.prototype.lifeSpan = 3 * SECS_TO_NOMINALS;
 
+
 Bullet.prototype.update = function (du) {
 
     if(this.lifeSpan > 0){
-      this.lifeSpan /= 16.667
+      this.lifeSpan /= 60;
     } else {
       this.alife = -1;
     }

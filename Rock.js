@@ -20,8 +20,8 @@ function Rock() {
 
 
     /*random x and y based on the width and height of the canvas*/
-    var randomX = Math.floor(Math.random() * g_canvas.width);
-    var randomY = Math.floor(Math.random() * g_canvas.height);
+    var randomX = util.randRange(0,g_canvas.width);
+    var randomY = util.randRange(0,g_canvas.height);
 
     // Rock randomisation
     this.cx = randomX; // CHANGE THIS
@@ -50,8 +50,8 @@ function Rock() {
     var convertMax = MAX_SPEED / SECS_TO_NOMINALS;
 
 
-    this.velX = (Math.floor(Math.random() * convertMax)) + convertMin;
-    this.velY = (Math.floor(Math.random() * convertMax)) + convertMin;
+    this.velX = util.randRange(convertMin,convertMax);
+    this.velY = util.randRange(convertMin,convertMax);
 
 
     var MIN_ROT_SPEED = 0.5,
@@ -64,7 +64,7 @@ function Rock() {
     var convertRotMin = MIN_ROT_SPEED / SECS_TO_NOMINALS;
     var convertRotMax = MAX_ROT_SPEED / SECS_TO_NOMINALS;
 
-    this.velRot = (Math.random() * convertRotMax) + convertRotMin; // CHANGE THIS
+    this.velRot = util.randRange(convertRotMin,convertRotMax); // CHANGE THIS
 
 }
 

@@ -54,6 +54,8 @@ _generateShip : function() {
 _findNearestShip : function(posX, posY) {
 
     // TODO: Implement this
+    var closestShip = this._ships[0];
+    var closestIndex = {posX,posY};
 
     // NB: Use this technique to let you return "multiple values"
     //     from a function. It's pretty useful!
@@ -121,6 +123,7 @@ yoinkNearestShip : function(xPos, yPos) {
     // TODO: Implement this
 
     // NB: Don't forget the "edge cases"
+    console.log(this._findNearestShip(xPos,yPos));
 },
 
 resetShips: function() {
