@@ -59,8 +59,8 @@ _findNearestShip : function(posX, posY) {
 
     // NB: Use this technique to let you return "multiple values"
     //     from a function. It's pretty useful!
-    //
     return {
+      //
 	theShip : closestShip,   // the object itself
 	theIndex: closestIndex   // the array index where it lives
     };
@@ -145,45 +145,34 @@ update: function(du) {
     // NB: Remember to handle the "KILL_ME_NOW" return value!
     //     and to properly update the array in that case.
 
-    for (var i in this._rocks) {
-      this._rocks[i].update(du);
-    }
+    for (var c = 0; c < this._categories.length; ++c) {
 
-    for (var i in this._ships) {
-      this._ships[i].update(du);
-    }
+          var aCategory = this._categories[c];
 
-    for (var i in this._bullets) {
-      if(this._bullets[i].alife === this.KILL_ME_NOW){
-        this._bullets.splice(i,1);
-      } else {
-        this._bullets[i].update(du);
+          for (var i = 0; i < aCategory.length; ++i) {
+
+              aCategory[i].update(du);
+
+          }
       }
-    }
 },
 
 render: function(ctx) {
+
 
     // TODO: Implement this
 
     // NB: Remember to implement the ._bShowRocks toggle!
     // (Either here, or if you prefer, in the Rock objects)
-    for (var i in this._rocks) {
-      this._rocks[i].render(ctx);
-    }
+    for (var c = 0; c < this._categories.length; ++c) {
 
+        var aCategory = this._categories[c];
 
-    for (var i in this._ships) {
-      this._ships[i].render(ctx);
-    }
+        for (var i = 0; i < aCategory.length; ++i) {
 
+            aCategory[i].render(ctx);
 
-    for (var i in this._bullets) {
-      if(this._bullets[i].alife === this.KILL_ME_NOW){
-        this._bullets.splice(i,1);
-      } else {
-        this._bullets[i].render(ctx);
-      }
+        }
     }
 
 }

@@ -18,7 +18,7 @@ function Bullet(descr) {
         this[property] = descr[property];
     }
 
-    
+
 }
 
 
@@ -33,6 +33,8 @@ Bullet.prototype.update = function (du) {
     } else {
       this.alife = -1;
     }
+
+    this.rotation += du;
 
 
 
@@ -70,10 +72,9 @@ Bullet.prototype.render = function (ctx) {
 
 
 
+
     // ..YOUR STUFF..
-    g_sprites.bullet.drawWrappedCentredAt(
-	ctx, this.cx , this.cy, this.rotation
-    );
+    g_sprites.bullet.drawWrappedCentredAt(ctx, this.cx , this.cy, this.rotation);
 
     // ..YOUR STUFF..
 
