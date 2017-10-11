@@ -39,7 +39,7 @@ _generateRocks : function() {
     var i,
 	NUM_ROCKS = 4;
 
-  for (var i = 0; i < NUM_ROCKS; i++) {
+  for (i = 0; i < NUM_ROCKS; i++) {
     this._rocks.push(new Rock());
   }
 
@@ -53,9 +53,31 @@ _generateShip : function() {
 
 _findNearestShip : function(posX, posY) {
 
-    // TODO: Implement this
-    var closestShip = this._ships[0];
-    var closestIndex = {posX,posY};
+    var diff = 500;
+
+    var closestShip;
+    var closestIndex;
+
+    for (var i = 0; i < this._ships.length; i++) {
+      var tmpX = Math.abs(posX - this._ships[i].cx);
+      var tmpY = Math.abs(posY - this._ships[i].cy);
+
+      var combineDiff = tmpX + tmpY;
+      if(diff > combineDiff){
+        diff = combineDiff;
+
+        closestShip = this._ships[i];
+        closestIndex = i;
+      }
+
+    }
+
+    closestShip.cx = posX;
+    closestShip.cy = posY;
+  console.log(util.clampRange(posX,0,g_canvas.width));
+
+  console.log(util.wrapRange(posX,0,g_canvas.width));
+
 
     // NB: Use this technique to let you return "multiple values"
     //     from a function. It's pretty useful!
@@ -123,7 +145,7 @@ yoinkNearestShip : function(xPos, yPos) {
     // TODO: Implement this
 
     // NB: Don't forget the "edge cases"
-    console.log(this._findNearestShip(xPos,yPos));
+    var NearestShip = this._findNearestShip(xPos,yPos);
 },
 
 resetShips: function() {
@@ -151,7 +173,15 @@ update: function(du) {
 
           for (var i = 0; i < aCategory.length; ++i) {
 
-              aCategory[i].update(du);
+              if(aCategory[i].alife === this.KILL_ME_NOW){
+                aCategory.splice(i,1);
+
+
+              } else {
+
+                aCategory[i].update(du);
+              }
+
 
           }
       }
@@ -170,8 +200,12 @@ render: function(ctx) {
 
         for (var i = 0; i < aCategory.length; ++i) {
 
-            aCategory[i].render(ctx);
+          if(aCategory[i].alife === this.KILL_ME_NOW){
+            aCategory.splice(i,1);
+          } else {
 
+            aCategory[i].render(ctx);
+          }
         }
     }
 

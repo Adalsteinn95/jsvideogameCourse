@@ -17,8 +17,6 @@ function Bullet(descr) {
     for (var property in descr) {
         this[property] = descr[property];
     }
-
-
 }
 
 
@@ -29,13 +27,16 @@ Bullet.prototype.lifeSpan = 3 * SECS_TO_NOMINALS;
 Bullet.prototype.update = function (du) {
 
     if(this.lifeSpan > 0){
-      this.lifeSpan /= 60;
+      this.lifeSpan -= du;
     } else {
       this.alife = -1;
+      this.opacity = 1;
     }
 
     this.rotation += du;
 
+    this.cx += this.velX * du;
+    this.cy += this.velY * du;
 
 
     // TODO: Implement this
@@ -57,6 +58,8 @@ Bullet.prototype.wrapPosition = function () {
     this.cy = util.wrapRange(this.cy, 0, g_canvas.height);
 };
 
+Bullet.prototype.opacity = 1;
+
 Bullet.prototype.render = function (ctx) {
 
     // TODO: Modify this to implement a smooth "fade-out" during
@@ -67,14 +70,16 @@ Bullet.prototype.render = function (ctx) {
 
     var fadeThresh = Bullet.prototype.lifeSpan / 3;
 
-    this.cx += this.velX;
-    this.cy += this.velY;
 
 
+    if(fadeThresh > this.lifeSpan){
+      this.opacity -= 0.012;
+    }
+    ctx.save();
+    ctx.globalAlpha = this.opacity;
 
-
-    // ..YOUR STUFF..
     g_sprites.bullet.drawWrappedCentredAt(ctx, this.cx , this.cy, this.rotation);
+    ctx.restore();
 
     // ..YOUR STUFF..
 

@@ -49,9 +49,15 @@ function Rock() {
     var convertMin = MIN_SPEED / SECS_TO_NOMINALS;
     var convertMax = MAX_SPEED / SECS_TO_NOMINALS;
 
+    if(Math.random() > 0.5){
+      convertMin = -convertMin;
+      convertMax = -convertMax;
+    }
 
-    this.velX = util.randRange(convertMin,convertMax);
-    this.velY = util.randRange(convertMin,convertMax);
+
+
+    this.velX = util.randRange(convertMax,convertMax);
+    this.velY = util.randRange(convertMax,convertMax);
 
 
     var MIN_ROT_SPEED = 0.5,
@@ -59,6 +65,11 @@ function Rock() {
 
     // Set the rotational velocity between the MIN and MAX above.
     // (Again, these are expressed in pixels per second).
+
+    if(Math.random() > 0.5){
+      MAX_ROT_SPEED = -MAX_ROT_SPEED;
+      MIN_ROT_SPEED = -MIN_ROT_SPEED;
+    }
 
 
     var convertRotMin = MIN_ROT_SPEED / SECS_TO_NOMINALS;
