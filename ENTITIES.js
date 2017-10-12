@@ -48,12 +48,14 @@ var g_ctx = g_canvas.getContext("2d");
 
 entityManager.generateShip({
     cx : 140,
-    cy : 200
+    cy : 200,
+    alife : 1,
 });
 
 entityManager.generateShip({
     cx : 200,
     cy : 200,
+    alife : 1,
 
    // numSubSteps : 2
 });
@@ -91,9 +93,9 @@ function gatherInputs() {
 // GAME-SPECIFIC UPDATE LOGIC
 
 function updateSimulation(du) {
-    
+
     processDiagnostics();
-    
+
     entityManager.update(du);
 
     // Prevent perpetual firing!
@@ -136,7 +138,8 @@ function processDiagnostics() {
 
     if (eatKey(KEY_1)) entityManager.generateShip({
 	cx : g_mouseX,
-	cy : g_mouseY});
+	cy : g_mouseY,
+  alife : 1});
 
     if (eatKey(KEY_K)) entityManager.killNearestShip(
         g_mouseX, g_mouseY);

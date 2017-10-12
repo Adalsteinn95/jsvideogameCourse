@@ -40,6 +40,7 @@ Ship.prototype.cy = 200;
 Ship.prototype.velX = 0;
 Ship.prototype.velY = 0;
 Ship.prototype.numSubSteps = 1;
+Ship.prototype.alife = 1;
 
 Ship.prototype.update = function(du) {
     var steps = this.numSubSteps;

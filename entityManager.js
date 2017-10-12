@@ -63,9 +63,7 @@ _findNearestShip : function(posX, posY) {
       var tmpX = Math.abs(posX - this._ships[i].cx);
       var tmpY = Math.abs(posY - this._ships[i].cy);
 
-      var combineDiff = util.wrappedDistSq(posX,posY,this._ships[i].cx,this._ships[i].cy,400,400);
-
-      console.log(i + " distance: "+Math.sqrt(util.wrappedDistSq(posX,posY,this._ships[i].cx,this._ships[i].cy,400,400)));
+      var combineDiff = util.wrappedDistSq(posX,posY,this._ships[i].cx,this._ships[i].cy,g_canvas.width,g_canvas.height);
 
       if(diff > combineDiff){
         diff = combineDiff;
@@ -143,6 +141,12 @@ killNearestShip : function(xPos, yPos) {
     // TODO: Implement this
 
     // NB: Don't forget the "edge cases"
+
+    if(this._ships.length < 1){
+      return;
+    }
+    var NearestShip = this._findNearestShip(xPos,yPos);
+    this._ships[NearestShip.theIndex].alife = this.KILL_ME_NOW;
 },
 
 yoinkNearestShip : function(xPos, yPos) {
