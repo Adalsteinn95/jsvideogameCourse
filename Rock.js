@@ -49,15 +49,17 @@ function Rock() {
     var convertMin = MIN_SPEED / SECS_TO_NOMINALS;
     var convertMax = MAX_SPEED / SECS_TO_NOMINALS;
 
-    if(Math.random() > 0.5){
-      convertMin = -convertMin;
-      convertMax = -convertMax;
-    }
-
-
-
     this.velX = util.randRange(convertMax,convertMax);
     this.velY = util.randRange(convertMax,convertMax);
+
+    if(Math.random() > 0.5){
+      this.velX = -this.velX;
+    }
+
+    if(Math.random() > 0.5){
+      this.velY = -this.velY;
+    }
+
 
 
     var MIN_ROT_SPEED = 0.5,

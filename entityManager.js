@@ -53,16 +53,20 @@ _generateShip : function() {
 
 _findNearestShip : function(posX, posY) {
 
-    var diff = 500;
+    var diff = 100000;
 
     var closestShip;
     var closestIndex;
+
 
     for (var i = 0; i < this._ships.length; i++) {
       var tmpX = Math.abs(posX - this._ships[i].cx);
       var tmpY = Math.abs(posY - this._ships[i].cy);
 
-      var combineDiff = tmpX + tmpY;
+      var combineDiff = util.wrappedDistSq(posX,posY,this._ships[i].cx,this._ships[i].cy,400,400);
+
+      console.log(i + " distance: "+Math.sqrt(util.wrappedDistSq(posX,posY,this._ships[i].cx,this._ships[i].cy,400,400)));
+
       if(diff > combineDiff){
         diff = combineDiff;
 
@@ -72,11 +76,11 @@ _findNearestShip : function(posX, posY) {
 
     }
 
+
+
     closestShip.cx = posX;
     closestShip.cy = posY;
-  console.log(util.clampRange(posX,0,g_canvas.width));
 
-  console.log(util.wrapRange(posX,0,g_canvas.width));
 
 
     // NB: Use this technique to let you return "multiple values"

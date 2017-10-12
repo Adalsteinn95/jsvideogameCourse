@@ -71,9 +71,12 @@ Bullet.prototype.render = function (ctx) {
     var fadeThresh = Bullet.prototype.lifeSpan / 3;
 
 
-
+    /*when 1 sec is left we make it fade slightly*/
     if(fadeThresh > this.lifeSpan){
-      this.opacity -= 0.012;
+      this.opacity -= 0.020;
+      if(this.opacity < 0){
+        this.opacity = 0.01;
+      }
     }
     ctx.save();
     ctx.globalAlpha = this.opacity;
