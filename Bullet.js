@@ -33,7 +33,7 @@ Bullet.prototype.update = function (du) {
       this.opacity = 1;
     }
 
-    this.rotation += du;
+    this.rotation += du * 60;
 
     this.cx += this.velX * du;
     this.cy += this.velY * du;
