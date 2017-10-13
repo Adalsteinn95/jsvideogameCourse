@@ -39,6 +39,7 @@ _generateRocks : function() {
     var i,
 	NUM_ROCKS = 4;
 
+
   for (i = 0; i < NUM_ROCKS; i++) {
     this._rocks.push(new Rock());
   }
@@ -150,9 +151,7 @@ killNearestShip : function(xPos, yPos) {
 },
 
 yoinkNearestShip : function(xPos, yPos) {
-    // TODO: Implement this
 
-    // NB: Don't forget the "edge cases"
     var NearestShip = this._findNearestShip(xPos,yPos);
 },
 
@@ -166,6 +165,14 @@ haltShips: function() {
 
 toggleRocks: function() {
     this._bShowRocks = !this._bShowRocks;
+
+
+
+    if(this._bShowRocks){
+      this._rocks.splice(0,this._rocks.length);
+    } else {
+      this._generateRocks();
+    }
 },
 
 update: function(du) {
