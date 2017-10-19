@@ -62,13 +62,17 @@ unregister: function(entity) {
 
 findEntityInRange: function(posX, posY, radius) {
 
+    var hit = false;
     // TODO: YOUR STUFF HERE!
-    /*
     for (var i = 0; i < this._entities.length; i++) {
-      if(this._entities[i].cx + this._entities[i].radius < posX + radius){
-        console.log("hit");
+      var position = this._entities[i].getPos();
+      var distance = util.distSq(posX,posY,position.posX,position.posY);
+      if(Math.sqrt(distance) - this._entities[i].getRadius() <= 0){
+        hit = true;
       }
-    }*/
+    }
+
+    return hit;
 },
 
 render: function(ctx) {
