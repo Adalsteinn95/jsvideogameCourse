@@ -64,6 +64,10 @@ Rock.prototype.update = function (du) {
     // TODO: YOUR STUFF HERE! --- Unregister and check for death
     spatialManager.unregister(this);
 
+    if(this._isDeadNow === true){
+      return entityManager.KILL_ME_NOW;
+    }
+
     this.cx += this.velX * du;
     this.cy += this.velY * du;
 
@@ -116,4 +120,5 @@ Rock.prototype.render = function (ctx) {
     this.sprite.drawWrappedCentredAt(
         ctx, this.cx, this.cy, this.rotation
     );
+
 };

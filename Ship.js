@@ -135,6 +135,17 @@ Ship.prototype.update = function (du) {
     // TODO: YOUR STUFF HERE! --- Unregister and check for death
     spatialManager.unregister(this);
 
+    // TODO? NO, ACTUALLY, I JUST DID THIS BIT FOR YOU! :-)
+    //
+    // Handle collisions
+    //
+    var hitEntity = this.findHitEntity();
+    if (hitEntity) {
+        var canTakeHit = hitEntity.takeBulletHit;
+        if (canTakeHit) canTakeHit.call(hitEntity);
+        this.takeBulletHit();
+    }
+
     // Perform movement substeps
     var steps = this.numSubSteps;
     var dStep = du / steps;

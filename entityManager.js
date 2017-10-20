@@ -17,7 +17,7 @@ with suitable 'data' and 'methods'.
 
 
 // Tell jslint not to complain about my use of underscore prefixes (nomen),
-// my flattening of some indentation (white), or my use of incr/decr ops 
+// my flattening of some indentation (white), or my use of incr/decr ops
 // (plusplus).
 //
 /*jslint nomen: true, white: true, plusplus: true*/
@@ -54,7 +54,7 @@ _findNearestShip : function(posX, posY) {
         var thisShip = this._ships[i];
         var shipPos = thisShip.getPos();
         var distSq = util.wrappedDistSq(
-            shipPos.posX, shipPos.posY, 
+            shipPos.posX, shipPos.posY,
             posX, posY,
             g_canvas.width, g_canvas.height);
 
@@ -134,7 +134,7 @@ resetShips: function() {
 
 haltShips: function() {
     this._forEachOf(this._ships, Ship.prototype.halt);
-},	
+},
 
 toggleRocks: function() {
     this._bShowRocks = !this._bShowRocks;
@@ -151,7 +151,9 @@ update: function(du) {
 
             var status = aCategory[i].update(du);
 
+
             if (status === this.KILL_ME_NOW) {
+
                 // remove the dead guy, and shuffle the others down to
                 // prevent a confusing gap from appearing in the array
                 aCategory.splice(i,1);
@@ -161,7 +163,7 @@ update: function(du) {
             }
         }
     }
-    
+
     if (this._rocks.length === 0) this._generateRocks();
 
 },
@@ -174,13 +176,14 @@ render: function(ctx) {
 
         var aCategory = this._categories[c];
 
-        if (!this._bShowRocks && 
+        if (!this._bShowRocks &&
             aCategory == this._rocks)
             continue;
 
         for (var i = 0; i < aCategory.length; ++i) {
 
             aCategory[i].render(ctx);
+
             //debug.text(".", debugX + i * 10, debugY);
 
         }
@@ -192,4 +195,3 @@ render: function(ctx) {
 
 // Some deferred setup which needs the object to have been created first
 entityManager.deferredSetup();
-
