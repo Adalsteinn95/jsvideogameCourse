@@ -126,6 +126,11 @@ Ship.prototype._moveToASafePlace = function () {
 
 Ship.prototype.update = function (du) {
 
+    if(this._isDeadNow === true){
+      spatialManager.unregister(this);
+      return entityManager.KILL_ME_NOW;
+    }
+
     // Handle warping
     if (this._isWarping) {
         this._updateWarp(du);
