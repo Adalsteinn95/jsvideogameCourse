@@ -60,7 +60,7 @@ unregister: function(entity) {
 
 },
 
-findEntityInRange: function(posX, posY, radius) {
+findEntityInRange: function(posX, posY, radius, entity) {
 
     var hit = false;
     // TODO: YOUR STUFF HERE!
@@ -68,7 +68,12 @@ findEntityInRange: function(posX, posY, radius) {
       var position = this._entities[i].getPos();
       var distance = util.distSq(posX,posY,position.posX,position.posY);
       if(Math.sqrt(distance) - this._entities[i].getRadius() - radius <= 0){
-        this._entities[i].takeBulletHit();
+        console.log(this._entities[i]);
+        if(entity.reset_cx === 200 && this._entities[i].velRot > 0 || this._entities[i].velRot < 0 ){
+
+        } else {
+          this._entities[i].takeBulletHit();
+        }
         hit = true;
       }
     }
